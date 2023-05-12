@@ -72,11 +72,11 @@ export default function ScrollDialog() {
   return (
     <div>
       <Box
-        sx={{
-          backgroundColor: "#C4C4C4",
-          padding: "0rem 0rem 4rem 0rem",
-          minHeight: "100vh",
-        }}
+          sx={{
+            backgroundColor: "#C4C4C4",
+            padding: "0rem 0rem 4rem 0rem",
+            minHeight: "100vh",
+          }}
       >
         <Header />
         <Container>

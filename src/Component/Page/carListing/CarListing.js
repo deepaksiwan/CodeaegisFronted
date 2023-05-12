@@ -4,6 +4,7 @@ import { makeStyles } from "@mui/styles";
 import carImage from "../../../images/carImage.jpg";
 import { useQuery } from "react-query";
 import { getAllCarList } from "../../../Api/ApiCall/CarList";
+import { useNavigate, useParams , Link} from "react-router-dom";
 
 import Modal from "../carListing/Modal";
 import { UserContext } from "../../../Context/UserContext";
@@ -47,10 +48,24 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
   },
+  loaderMain:{
+    justifyContent: "center !important",
+    height: "100vh"
+  },
+  detailsbtn:{
+    textDecoration: "none",
+     backgroundColor: "#00adc9",
+     color: "white",
+     borderRadius: "5px",
+     fontSize: "15px"
+  }
 });
 
 const AllCarLiting = () => {
   const [{ userData }] = useContext(UserContext);
+
+  
+  
   const classes = useStyles();
   const { data: carList, isFetched } = useQuery(
     "getAllCarList",
@@ -78,6 +93,8 @@ const AllCarLiting = () => {
   const endIndex = startIndex + itemsPerPage;
   const itemsForCurrentPage = carList?.response?.slice(startIndex, endIndex);
 
+  
+
   return (
     <div>
       <Container>
@@ -98,6 +115,7 @@ const AllCarLiting = () => {
                       >
                         {" "}
                         <Typography
+                          sx={{}}
                           className={classes.scale__img}
                           component={"img"}
                           src={v?.car_image}
@@ -125,18 +143,22 @@ const AllCarLiting = () => {
                     {userData?._id === v?.createdby && (
                       <Modal car_id={v?._id} />
                     )}
+                    <Link className={classes.detailsbtn} to={`/CarDetails/${v._id}`}>
+                       Show Car Details
+                    </Link>
                   </Box>
                   <Box></Box>
                 </Box>
               </Grid>
             ))
           ) : (
-            <Box className={classes.mainDiv}>
-              <Loader />
-            </Box>
+             <Grid className={classes.loaderMain}  item lg={12} md={12} sm={12} xs={12}>
+                  <Typography> Loading ...<Loader/></Typography>
+              </Grid>
           )}
         </Grid>
       </Container>
+
       {isFetched === true ? (
         <Pagination
           sx={{

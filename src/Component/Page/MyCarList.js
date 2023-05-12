@@ -48,10 +48,9 @@ const useStyles = makeStyles({
       transform: "scale(1.1)",
     },
   },
-  loader:{
-    width: "100vh",
-    textalign: "center"
-    
+  loaderMain:{
+    justifyContent: "center !important",
+    height: "100vh",
   }
 });
 
@@ -114,7 +113,7 @@ const MyCarList = () => {
                             <Typography
                               className={classes.scale__img}
                               component={"img"}
-                              src={v.car_image}
+                              src={v.car_image?v.car_image: "Loading"}
                             />
                           </Typography>
                         </Box>
@@ -142,11 +141,9 @@ const MyCarList = () => {
                 );
               })
             ) : (
-              <Box className={classes.loader}>
-                <Loader />
-                
-              </Box>
-             
+              <Grid  className={classes.loaderMain} item lg={12} md={12} sm={12} xs={12}>
+                <Typography>Loading ...<Loader/></Typography>
+              </Grid>
             )}
           </Grid>
           {itemsForCurrentPage?.length === 0 &&<Typography>No any Car Found</Typography>}

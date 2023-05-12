@@ -89,6 +89,11 @@ export const Header = () => {
     navigate("/");
   };
 
+  const HandleMycar = ()=>{
+    navigate("/MyCarList");
+
+  }
+
   return (
     <Box>
       <Container>
@@ -109,10 +114,10 @@ export const Header = () => {
                 </NavLink>
               </Box>
               {token ? (
-                <Box component={"li"}>
-                  <NavLink to="/MyCarList" className={classes.NavLink___List}>
+                <Box onClick={HandleMycar} component={"li"}>
+                  <Link  className={classes.NavLink___List}>
                     MyCars
-                  </NavLink>
+                  </Link>
                 </Box>
               ) : (
                 ""

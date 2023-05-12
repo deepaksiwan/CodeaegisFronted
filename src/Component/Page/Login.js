@@ -136,12 +136,15 @@ const Login = () => {
             type: actionTypes?.SET_USER,
             value: data.responseResult,
           });
-          toast.success(JSON.stringify(data.message));
+          toast.success(JSON.stringify(data.responseMessage));
           navigate("/");
         } else  if(data){
           toast.error(JSON.stringify(data.message));
         }
-      } catch (error) {}
+      } catch (error) {
+        toast.error(JSON.stringify(error.message));
+      }
+      
     },
     onError: (error, data) => {
       toast.error(JSON.stringify(data.responseMessage));
